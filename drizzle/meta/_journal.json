@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1696382544330,
+      "tag": "0000_redundant_ultimates",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1696382965560,
+      "tag": "0001_needy_carmella_unuscione",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1696382993234,
+      "tag": "0002_mushy_steel_serpent",
+      "breakpoints": true
+    }
+  ]
+}
