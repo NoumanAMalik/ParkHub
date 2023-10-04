@@ -1,3 +1,5 @@
+![image](https://github.com/NoumanAMalik/ParkHub/assets/59700899/dfa8072f-cf12-4b8f-8d18-8b43f3321a1f)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
