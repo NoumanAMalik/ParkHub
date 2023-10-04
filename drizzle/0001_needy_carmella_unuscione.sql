@@ -1,1 +1,0 @@
-ALTER TABLE `countries` DROP CONSTRAINT `name_idx`;
