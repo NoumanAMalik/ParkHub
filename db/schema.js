@@ -1,5 +1,4 @@
 import {
-    int,
     mysqlEnum,
     mysqlTable,
     bigint,

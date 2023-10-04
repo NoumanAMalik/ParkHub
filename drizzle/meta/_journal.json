@@ -22,6 +22,20 @@
       "when": 1696382993234,
       "tag": "0002_mushy_steel_serpent",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1696442232203,
+      "tag": "0003_black_paper_doll",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1696442537628,
+      "tag": "0004_deep_rattler",
+      "breakpoints": true
     }
   ]
 }
