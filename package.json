@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "autoprefixer": "latest",
+    "drizzle-kit": "^0.19.13",
     "postcss": "latest",
     "tailwindcss": "latest"
   }
