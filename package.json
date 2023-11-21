@@ -20,6 +20,7 @@
     },
     "devDependencies": {
         "autoprefixer": "latest",
+        "daisyui": "^4.4.2",
         "dotenv": "^16.3.1",
         "drizzle-kit": "^0.19.13",
         "postcss": "latest",
