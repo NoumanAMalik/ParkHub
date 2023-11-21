@@ -1,10 +1,4 @@
-import {
-    mysqlEnum,
-    mysqlTable,
-    bigint,
-    uniqueIndex,
-    varchar,
-} from "drizzle-orm/mysql-core";
+import { mysqlTable, bigint, varchar, timestamp } from "drizzle-orm/mysql-core";
 
 // Parking System
 // Parking Lot:
@@ -13,24 +7,39 @@ import {
 //      id, name, license plate
 // Parked:
 //      id, license plate, location id, duration
-// Transcatoins:
+// Transcations:
 //      id, payment to, payment from, payment amount, date, payment method, parking id,
 //
 
-// declaring enum in database
-export const countries = mysqlTable(
-    "countries",
-    {
-        id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
-        name: varchar("name", { length: 256 }),
-    },
-    (countries) => ({
-        nameIndex: uniqueIndex("name_idx").on(countries.name),
-    }),
-);
-
-export const cities = mysqlTable("cities", {
+export const ParkingLot = mysqlTable("ParkingLot", {
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
-    name: varchar("name", { length: 256 }),
-    popularity: mysqlEnum("popularity", ["unknown", "known", "popular"]),
+    name: varchar("name"),
+    location: varchar("location"),
+    spacesAvailable: bigint("spacesAvailable", { mode: "number" }),
+    price: bigint("price", { mode: "number" }),
+});
+
+export const User = mysqlTable("User", {
+    id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+    firstName: varchar("firstName"),
+    lastName: varchar("lastName"),
+    licensePlate: varchar("licensePlate"),
+});
+
+export const Parked = mysqlTable("Parked", {
+    id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+    licensePlate: varchar("licensePlate").references(() => User.licensePlate),
+    lotId: bigint("lotId", { mode: "number" }).references(() => ParkingLot.id),
+    duration: bigint("duration", { mode: "number" }),
+});
+
+export const Transcations = mysqlTable("Transactions", {
+    id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+    paymentTo: bigint("paymentTo", { mode: "number" }).references(
+        () => ParkingLot.id
+    ),
+    paymentFrom: varchar("paymentFrom").references(() => User.id),
+    paymentAmount: bigint("paymentAmount", { mode: "number" }),
+    timestamp: timestamp("timestamp").defaultNow(),
+    parkingId: bigint("parkingId", { mode: "number" }).references(Parked.id),
 });
