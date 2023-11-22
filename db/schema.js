@@ -13,33 +13,31 @@ import { mysqlTable, bigint, varchar, timestamp } from "drizzle-orm/mysql-core";
 
 export const ParkingLot = mysqlTable("ParkingLot", {
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
-    name: varchar("name"),
-    location: varchar("location"),
+    name: varchar("name", { length: 256 }),
+    location: varchar("location", { length: 256 }),
     spacesAvailable: bigint("spacesAvailable", { mode: "number" }),
     price: bigint("price", { mode: "number" }),
 });
 
 export const User = mysqlTable("User", {
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
-    firstName: varchar("firstName"),
-    lastName: varchar("lastName"),
-    licensePlate: varchar("licensePlate"),
+    firstName: varchar("firstName", { length: 256 }),
+    lastName: varchar("lastName", { length: 256 }),
+    licensePlate: varchar("licensePlate", { length: 256 }),
 });
 
 export const Parked = mysqlTable("Parked", {
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
-    licensePlate: varchar("licensePlate").references(() => User.licensePlate),
-    lotId: bigint("lotId", { mode: "number" }).references(() => ParkingLot.id),
+    userId: varchar("userId", { length: 256 }),
+    lotId: bigint("lotId", { mode: "number" }),
     duration: bigint("duration", { mode: "number" }),
 });
 
 export const Transcations = mysqlTable("Transactions", {
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
-    paymentTo: bigint("paymentTo", { mode: "number" }).references(
-        () => ParkingLot.id
-    ),
-    paymentFrom: varchar("paymentFrom").references(() => User.id),
+    paymentTo: bigint("paymentTo", { mode: "number" }),
+    paymentFrom: varchar("paymentFrom", { length: 256 }),
     paymentAmount: bigint("paymentAmount", { mode: "number" }),
     timestamp: timestamp("timestamp").defaultNow(),
-    parkingId: bigint("parkingId", { mode: "number" }).references(Parked.id),
+    parkingId: bigint("parkingId", { mode: "number" }),
 });
