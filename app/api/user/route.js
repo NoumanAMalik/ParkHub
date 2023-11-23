@@ -3,6 +3,7 @@ import { drizzle } from "drizzle-orm/planetscale-serverless";
 import { connect } from "@planetscale/database";
 import { User, schema } from "@/db/schema";
 import { NextResponse } from "next/server";
+import { eq } from "drizzle-orm";
 
 const connection = connect({
     host: process.env.DATABASE_HOST,
@@ -13,22 +14,33 @@ const connection = connect({
 const db = drizzle(connection, { schema });
 
 export async function GET(request) {
-    const result = await db.select().from(User);
+    const params = request.nextUrl.searchParams;
+    for (const [key, value] of params) {
+        if (value != "") {
+            const result = await db
+                .select()
+                .from(User)
+                .where(eq(User.licensePlate, value));
 
-    return NextResponse.json(result);
+            console.log(result);
+        }
+    }
+
+    // const result = await db.select().from(User);
+
+    return NextResponse.json({ test: "works" });
 }
 
 export async function POST(request) {
     // create the connection
 
-    const { firstName, lastName, licensePlate } = await request.json();
-    console.log(firstName, lastName, licensePlate);
+    // const { firstName, lastName, licensePlate } = await request.json();
 
-    await db.insert(User).values({
-        firstName: firstName,
-        lastName: lastName,
-        licensePlate: licensePlate,
-    });
+    // await db.insert(User).values({
+    //     firstName: firstName,
+    //     lastName: lastName,
+    //     licensePlate: licensePlate,
+    // });
     // const { Hello } = await request.json();
 
     // console.log("POST: Called");

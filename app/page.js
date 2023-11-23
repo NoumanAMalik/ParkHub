@@ -29,10 +29,10 @@ export default function Home() {
             return res.json();
         };
 
-        // (async () => {
-        //     console.log(await post());
-        //     console.log(await get());
-        // })();
+        (async () => {
+            console.log(await post());
+            // console.log(await get());
+        })();
     }, []);
 
     return (
