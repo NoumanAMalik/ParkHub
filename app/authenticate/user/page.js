@@ -38,6 +38,41 @@ const User = () => {
                     lastName: lastName,
                     licensePlate: licensePlate,
                 };
+
+                let res = await fetch(`/api/user`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(body),
+                });
+
+                let response = await res.json();
+
+                console.log(response.result);
+
+                body = {
+                    licensePlate: licensePlate,
+                };
+
+                res = await fetch(`/api/user?` + new URLSearchParams(body), {
+                    method: "GET",
+                });
+
+                response = await res.json();
+
+                if (response.result[0] == "empty") return;
+
+                if (response.result.length == 0) {
+                    console.log("DIDN'T FIND");
+                } else {
+                    // USER EXISTS
+                    console.log(response.result[0]);
+
+                    router.push(
+                        `/book?` + new URLSearchParams(response.result[0])
+                    );
+                }
             } else {
                 body = {
                     licensePlate: licensePlate,

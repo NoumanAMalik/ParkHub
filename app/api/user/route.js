@@ -35,18 +35,19 @@ export async function GET(request) {
 export async function POST(request) {
     // create the connection
 
-    // const { firstName, lastName, licensePlate } = await request.json();
+    const { firstName, lastName, licensePlate } = await request.json();
 
-    // await db.insert(User).values({
-    //     firstName: firstName,
-    //     lastName: lastName,
-    //     licensePlate: licensePlate,
-    // });
-    // const { Hello } = await request.json();
+    try {
+        await db.insert(User).values({
+            firstName: firstName,
+            lastName: lastName,
+            licensePlate: licensePlate,
+        });
+    } catch (e) {
+        console.log(e);
+    }
 
-    // console.log("POST: Called");
+    console.log("POST: Called");
 
-    // console.log(Hello);
-
-    return NextResponse.json({ response: "Created User" });
+    return NextResponse.json({ result: "Created User" });
 }
