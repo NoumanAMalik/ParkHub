@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Input from "@/components/input";
 
 const User = () => {
@@ -10,6 +11,7 @@ const User = () => {
         licensePlate: "",
     });
     const [submitData, setSubmitData] = useState(false);
+    const router = useRouter();
 
     const formUpdate = (event) => {
         setFormData((prevState) => ({
@@ -25,7 +27,7 @@ const User = () => {
     };
 
     useEffect(() => {
-        const get = async () => {
+        const callAPI = async () => {
             const { firstName, lastName, licensePlate } = formData;
 
             let body = {};
@@ -40,19 +42,33 @@ const User = () => {
                 body = {
                     licensePlate: licensePlate,
                 };
-            }
 
-            const res = await fetch(`/api/user?` + new URLSearchParams(body), {
-                method: "GET",
-            });
+                const res = await fetch(
+                    `/api/user?` + new URLSearchParams(body),
+                    {
+                        method: "GET",
+                    }
+                );
+
+                const response = await res.json();
+
+                if (response.result[0] == "empty") return;
+
+                if (response.result.length == 0) {
+                    console.log("DIDN'T FIND");
+                } else {
+                    // USER EXISTS
+                    console.log(response.result[0]);
+
+                    router.push(
+                        `/book?` + new URLSearchParams(response.result[0])
+                    );
+                }
+            }
         };
 
-        get();
+        callAPI();
     }, [submitData]);
-
-    useEffect(() => {
-        console.log(formData);
-    }, [formData]);
 
     return (
         <div className="flex flex-col items-center justify-center">
@@ -79,6 +95,7 @@ const User = () => {
             {modeToggle == "Create" && (
                 <div className="flex flex-col items-center">
                     <Input
+                        uniqueId={1}
                         id="firstName"
                         label="Enter your First Name"
                         placeholder="Type here"
@@ -86,6 +103,7 @@ const User = () => {
                     />
 
                     <Input
+                        uniqueId={2}
                         id="lastName"
                         label="Enter is your Last Name"
                         placeholder="Type Here"
@@ -93,6 +111,7 @@ const User = () => {
                     />
 
                     <Input
+                        uniqueId={3}
                         id="licensePlate"
                         label="Enter is your License Plate Number"
                         placeholder="Type Here"
@@ -111,6 +130,7 @@ const User = () => {
             {modeToggle == "Login" && (
                 <div className="flex flex-col items-center">
                     <Input
+                        uniqueId={1}
                         id="licensePlate"
                         label="Enter is your License Plate Number"
                         placeholder="Type Here"

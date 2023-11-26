@@ -23,12 +23,13 @@ export async function GET(request) {
                 .where(eq(User.licensePlate, value));
 
             console.log(result);
+            return NextResponse.json({ result: result });
         }
     }
 
-    // const result = await db.select().from(User);
+    return NextResponse.json({ result: ["empty"] });
 
-    return NextResponse.json({ test: "works" });
+    // const result = await db.select().from(User);
 }
 
 export async function POST(request) {
