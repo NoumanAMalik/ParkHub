@@ -13,6 +13,7 @@ import { mysqlTable, bigint, varchar, timestamp } from "drizzle-orm/mysql-core";
 
 export const ParkingLot = mysqlTable("ParkingLot", {
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+    ownerId: varchar("ownerId", { length: 256 }),
     name: varchar("name", { length: 256 }).unique(),
     location: varchar("location", { length: 256 }),
     spacesAvailable: bigint("spacesAvailable", { mode: "number" }),
@@ -24,6 +25,11 @@ export const User = mysqlTable("User", {
     firstName: varchar("firstName", { length: 256 }),
     lastName: varchar("lastName", { length: 256 }),
     licensePlate: varchar("licensePlate", { length: 256 }).unique(),
+});
+
+export const Owner = mysqlTable("Owner", {
+    id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+    email: varchar("email", { length: 256 }).unique(),
 });
 
 export const Parked = mysqlTable("Parked", {
