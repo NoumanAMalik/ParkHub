@@ -4,36 +4,36 @@ import { useEffect } from "react";
 import Link from "next/link";
 
 export default function Home() {
-    useEffect(() => {
-        const post = async () => {
-            const res = await fetch(`/api/user`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    firstName: "Nouman",
-                    lastName: "Malik",
-                    licensePlate: "CLXK646",
-                }),
-            });
+    // useEffect(() => {
+    //     const post = async () => {
+    //         const res = await fetch(`/api/user`, {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify({
+    //                 firstName: "Nouman",
+    //                 lastName: "Malik",
+    //                 licensePlate: "CLXK646",
+    //             }),
+    //         });
 
-            return res.json();
-        };
+    //         return res.json();
+    //     };
 
-        const get = async () => {
-            const res = await fetch(`/api/user`, {
-                method: "GET",
-            });
+    //     const get = async () => {
+    //         const res = await fetch(`/api/user`, {
+    //             method: "GET",
+    //         });
 
-            return res.json();
-        };
+    //         return res.json();
+    //     };
 
-        (async () => {
-            console.log(await post());
-            // console.log(await get());
-        })();
-    }, []);
+    //     (async () => {
+    //         console.log(await post());
+    //         // console.log(await get());
+    //     })();
+    // }, []);
 
     return (
         <main className="flex min-h-screen flex-col items-center">
