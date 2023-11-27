@@ -34,19 +34,6 @@ export async function GET(request) {
     console.log(result);
 
     return NextResponse.json({ result: result });
-
-    // const params = request.nextUrl.searchParams;
-
-    // const result = await db
-    //     .select()
-    //     .from(Owner)
-    //     .where(eq(Owner.email, params.get("email")));
-
-    // if (result.length != 0) {
-    //     return NextResponse.json({ result: result });
-    // }
-
-    // return NextResponse.json({ result: "not found" });
 }
 
 export async function POST(request) {
@@ -73,16 +60,4 @@ export async function POST(request) {
     }
 
     return NextResponse.json({ result: "Created Parking Lot" });
-
-    // const { email } = await request.json();
-
-    // try {
-    //     await db.insert(Owner).values({
-    //         email: email,
-    //     });
-    // } catch (e) {
-    //     console.log(e);
-    // }
-
-    // return NextResponse.json({ result: "Created Owner" });
 }

@@ -90,25 +90,6 @@ const Dashboard = () => {
         callAPI();
     }, [submitData]);
 
-    // const formUpdate = (event) => {
-    //     setFormData((prevState) => ({
-    //         ...prevState,
-    //         [event.target.id]: event.target.value,
-    //     }));
-    // };
-
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-
-    //     setSubmitData(true);
-    // };
-
-    // useEffect(() => {
-    //     const callAPI = async () => {};
-
-    //     callAPI();
-    // }, [submitData]);
-
     return (
         <div className="flex flex-col items-center justify-center">
             <h1>Owner Dashboard Page</h1>
