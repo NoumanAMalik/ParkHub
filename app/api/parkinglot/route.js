@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { drizzle } from "drizzle-orm/planetscale-serverless";
 import { connect } from "@planetscale/database";
-import { Owner, User, schema } from "@/db/schema";
+import { Owner, ParkingLot, User, schema } from "@/db/schema";
 import { NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 
@@ -14,6 +14,12 @@ const connection = connect({
 const db = drizzle(connection, { schema });
 
 export async function GET(request) {
+    const result = await db.select().from(ParkingLot);
+
+    if (result.length != 0) return NextResponse.json({ result: result });
+
+    return NextResponse.json({ result: "not found" });
+
     // const params = request.nextUrl.searchParams;
     // const result = await db
     //     .select()
