@@ -42,7 +42,7 @@ export const Parked = mysqlTable("Parked", {
 export const Transcations = mysqlTable("Transactions", {
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
     paymentTo: bigint("paymentTo", { mode: "number" }),
-    paymentFrom: varchar("paymentFrom", { length: 256 }),
+    paymentFrom: bigint("paymentFrom", { mode: "number" }),
     paymentAmount: bigint("paymentAmount", { mode: "number" }),
     timestamp: timestamp("timestamp").defaultNow(),
     parkingId: bigint("parkingId", { mode: "number" }),

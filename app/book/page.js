@@ -8,6 +8,7 @@ const Book = () => {
     const [parkingData, setParkingData] = useState([]);
     const [selectedData, setSelectedData] = useState({});
     const [submitData, setSubmitData] = useState(false);
+    const [transactionData, setTransactionData] = useState(null);
     const [formData, setFormData] = useState({
         hours: "",
     });
@@ -55,7 +56,34 @@ const Book = () => {
     }, []);
 
     useEffect(() => {
-        console.log(formData);
+        if (!submitData) return;
+
+        const callAPI = async () => {
+            const userId = searchParams.get("id");
+
+            const body = {
+                userId: userId,
+                duration: formData.hours,
+                lotId: selectedData.id,
+            };
+
+            const res = await fetch(`/api/book`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(body),
+            });
+
+            const response = await res.json();
+
+            console.log(response.result);
+
+            setTransactionData(response.result);
+        };
+
+        callAPI();
+        // console.log(formData.hours);
     }, [submitData]);
 
     return (
@@ -131,6 +159,19 @@ const Book = () => {
                     >
                         Submit
                     </button>
+                    {transactionData != null && (
+                        <div>
+                            <p>Transaction Id: {transactionData.id}</p>
+                            <p>
+                                Transaction Amount:{" "}
+                                {transactionData.paymentAmount}
+                            </p>
+                            <p>
+                                Transaction Timestamp:{" "}
+                                {transactionData.timestamp}
+                            </p>
+                        </div>
+                    )}
                     <div className="modal-action">
                         <a
                             href="#"
