@@ -1,9 +1,8 @@
 import "dotenv/config";
 import { drizzle } from "drizzle-orm/planetscale-serverless";
 import { connect } from "@planetscale/database";
-import { Owner, ParkingLot, User, schema } from "@/db/schema";
+import { ParkingLot, schema } from "@/db/schema";
 import { NextResponse } from "next/server";
-import { eq } from "drizzle-orm";
 
 const connection = connect({
     host: process.env.DATABASE_HOST,
@@ -19,26 +18,4 @@ export async function GET(request) {
     if (result.length != 0) return NextResponse.json({ result: result });
 
     return NextResponse.json({ result: "not found" });
-
-    // const params = request.nextUrl.searchParams;
-    // const result = await db
-    //     .select()
-    //     .from(Owner)
-    //     .where(eq(Owner.email, params.get("email")));
-    // if (result.length != 0) {
-    //     return NextResponse.json({ result: result });
-    // }
-    // return NextResponse.json({ result: "not found" });
-}
-
-export async function POST(request) {
-    // const { email } = await request.json();
-    // try {
-    //     await db.insert(Owner).values({
-    //         email: email,
-    //     });
-    // } catch (e) {
-    //     console.log(e);
-    // }
-    // return NextResponse.json({ result: "Created Owner" });
 }

@@ -107,7 +107,7 @@ const User = () => {
 
     return (
         <div className="flex flex-col items-center justify-center">
-            <div className="mb-auto flex flex-row gap-8">
+            <div className="my-8 flex flex-row gap-8">
                 <button
                     className={`btn btn-wide btn-outline btn-primary ${
                         modeToggle == "Create" ? "btn-active" : ""

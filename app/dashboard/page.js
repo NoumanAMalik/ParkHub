@@ -92,10 +92,12 @@ const Dashboard = () => {
 
     return (
         <div className="flex flex-col items-center justify-center">
-            <h1>Owner Dashboard Page</h1>
+            <h1 className="text-xl font-bold underline">
+                Owner Dashboard Page
+            </h1>
             <p>Welcome {searchParams.get("email")}</p>
 
-            <div className="mb-auto flex flex-row gap-8 mt-4">
+            <div className="my-8 flex flex-row gap-8">
                 <button
                     className={`btn btn-wide btn-outline btn-primary ${
                         modeToggle == "View" ? "btn-active" : ""
@@ -116,7 +118,8 @@ const Dashboard = () => {
             </div>
 
             {modeToggle == "View" && (
-                <div className="flex flex-col items-center mt-8">
+                <div className="flex flex-col items-center">
+                    <h1 className="text-lg">Your Parking Lots:</h1>
                     <div className="overflow-x-auto">
                         <table className="table table-zebra">
                             {/* head */}
@@ -155,6 +158,7 @@ const Dashboard = () => {
 
             {modeToggle == "Add" && (
                 <div className="flex flex-col items-center">
+                    <h1 className="text-lg">Create a new Parking Lot:</h1>
                     <Input
                         uniqueId={1}
                         id="name"

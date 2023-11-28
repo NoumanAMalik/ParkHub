@@ -28,13 +28,9 @@ export async function GET(request) {
     }
 
     return NextResponse.json({ result: ["empty"] });
-
-    // const result = await db.select().from(User);
 }
 
 export async function POST(request) {
-    // create the connection
-
     const { firstName, lastName, licensePlate } = await request.json();
 
     try {

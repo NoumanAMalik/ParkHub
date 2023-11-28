@@ -88,15 +88,17 @@ const Book = () => {
 
     return (
         <div className="flex flex-col items-center justify-center">
-            <h1>Booking Page</h1>
-            {searchParams.get("firstName")}
-            <br></br>
-            {searchParams.get("lastName")}
-            <br></br>
-            {searchParams.get("licensePlate")}
-            <br></br>
-            <br></br>
-            <p>Available Parking Lots</p>
+            <h1 className="text-xl font-bold underline">Book a Parking Lot</h1>
+            <p className="text-lg mt-4">
+                Hello {searchParams.get("firstName")}{" "}
+                {searchParams.get("lastName")}
+            </p>
+            <p className="text-lg">
+                Your License Plate is: {searchParams.get("licensePlate")}
+            </p>
+            <h1 className="text-xl font-semibold mt-6">
+                Available Parking Lots:
+            </h1>
 
             <div className="flex flex-col items-center mt-8">
                 <div className="overflow-x-auto">
@@ -117,7 +119,7 @@ const Book = () => {
                                     <tr
                                         key={randNum()}
                                         onClick={() => handleRowClick(data)}
-                                        className="hover"
+                                        className="hover cursor-pointer"
                                     >
                                         <th key={randNum()}>{data.id}</th>
                                         <td key={randNum()}>{data.name}</td>
@@ -137,7 +139,7 @@ const Book = () => {
             <div className="modal" id="bookingModal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg underline">
-                        Book Parking
+                        Confirm Booking
                     </h3>
                     <p>Name: {selectedData?.name || "No Data"}</p>
                     <p>Location: {selectedData?.location || "No Data"}</p>
@@ -160,7 +162,8 @@ const Book = () => {
                         Submit
                     </button>
                     {transactionData != null && (
-                        <div>
+                        <div className="mt-4 outline rounded-xl p-4">
+                            <p className="text-lg underline">Booking Receipt</p>
                             <p>Transaction Id: {transactionData.id}</p>
                             <p>
                                 Transaction Amount:{" "}
