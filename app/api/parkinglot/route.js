@@ -15,6 +15,8 @@ const db = drizzle(connection, { schema });
 export async function GET(request) {
     const result = await db.select().from(ParkingLot);
 
+    console.log(result);
+
     if (result.length != 0) return NextResponse.json({ result: result });
 
     return NextResponse.json({ result: "not found" });
