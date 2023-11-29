@@ -7,7 +7,7 @@ const Book = () => {
     const searchParams = useSearchParams();
     const [parkingData, setParkingData] = useState([]);
     const [selectedData, setSelectedData] = useState({});
-    const [submitData, setSubmitData] = useState(false);
+    const [submitData, setSubmitData] = useState(0);
     const [transactionData, setTransactionData] = useState(null);
     const [formData, setFormData] = useState({
         hours: "",
@@ -23,7 +23,7 @@ const Book = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        setSubmitData(true);
+        setSubmitData((prev) => prev + 1);
     };
 
     const randNum = () => {
@@ -56,7 +56,7 @@ const Book = () => {
     }, []);
 
     useEffect(() => {
-        if (!submitData) return;
+        if (submitData == 0) return;
 
         const callAPI = async () => {
             const userId = searchParams.get("id");
@@ -89,20 +89,20 @@ const Book = () => {
     return (
         <div className="flex flex-col items-center justify-center">
             <h1 className="text-xl font-bold underline">Book a Parking Lot</h1>
-            <p className="text-lg mt-4">
+            <p className="mt-4 text-lg">
                 Hello {searchParams.get("firstName")}{" "}
                 {searchParams.get("lastName")}
             </p>
             <p className="text-lg">
                 Your License Plate is: {searchParams.get("licensePlate")}
             </p>
-            <h1 className="text-xl font-semibold mt-6">
+            <h1 className="mt-6 text-xl font-semibold">
                 Available Parking Lots:
             </h1>
 
-            <div className="flex flex-col items-center mt-8">
+            <div className="mt-8 flex flex-col items-center">
                 <div className="overflow-x-auto">
-                    <table className="table table-zebra">
+                    <table className="table-zebra table">
                         {/* head */}
                         <thead>
                             <tr>
@@ -138,7 +138,7 @@ const Book = () => {
 
             <div className="modal" id="bookingModal">
                 <div className="modal-box">
-                    <h3 className="font-bold text-lg underline">
+                    <h3 className="text-lg font-bold underline">
                         Confirm Booking
                     </h3>
                     <p>Name: {selectedData?.name || "No Data"}</p>
@@ -162,7 +162,7 @@ const Book = () => {
                         Submit
                     </button>
                     {transactionData != null && (
-                        <div className="mt-4 outline rounded-xl p-4">
+                        <div className="mt-4 rounded-xl p-4 outline">
                             <p className="text-lg underline">Booking Receipt</p>
                             <p>Transaction Id: {transactionData.id}</p>
                             <p>

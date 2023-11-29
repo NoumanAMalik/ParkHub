@@ -6,7 +6,7 @@ import Input from "@/components/input";
 const Dashboard = () => {
     const searchParams = useSearchParams();
     const [modeToggle, setModeToggle] = useState("View");
-    const [submitData, setSubmitData] = useState(false);
+    const [submitData, setSubmitData] = useState(0);
     const [parkingData, setParkingData] = useState([]);
     const [fetchData, setFetchData] = useState(0);
     const router = useRouter();
@@ -27,7 +27,7 @@ const Dashboard = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        setSubmitData(true);
+        setSubmitData((prev) => prev + 1);
     };
 
     const randNum = () => {
@@ -46,7 +46,7 @@ const Dashboard = () => {
                 `/api/dashboard?` + new URLSearchParams(body),
                 {
                     method: "GET",
-                }
+                },
             );
 
             const response = await res.json();
@@ -58,6 +58,7 @@ const Dashboard = () => {
     }, [fetchData]);
 
     useEffect(() => {
+        if (submitData == 0) return;
         const callAPI = async () => {
             const email = searchParams.get("email");
             const { name, location, spacesAvailable, price } = formData;
@@ -121,7 +122,7 @@ const Dashboard = () => {
                 <div className="flex flex-col items-center">
                     <h1 className="text-lg">Your Parking Lots:</h1>
                     <div className="overflow-x-auto">
-                        <table className="table table-zebra">
+                        <table className="table-zebra table">
                             {/* head */}
                             <thead>
                                 <tr>
